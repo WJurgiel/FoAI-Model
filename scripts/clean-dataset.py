@@ -1,11 +1,28 @@
 import pandas as pd
-import ast
-import re
+import os
+import zipfile
+from kaggle.api.kaggle_api_extended import KaggleApi
+
+api=KaggleApi()
+api.authenticate()
+
+api.dataset_download_file(
+    'paultimothymooney/recipenlg',
+    file_name='RecipeNLG_dataset.csv',
+    path='../data'
+)
+
+original_path = '../data/RecipeNLG_dataset.csv'
+zip_path = '../data/RecipeNLG_dataset.zip'
+os.rename(original_path, zip_path)
+with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+    zip_ref.extractall('../data')
+os.remove(zip_path)
 
 input_path='../data/RecipeNLG_dataset.csv'
 output_path='../data/train-data.csv'
 
-print('Reading dataset...')
+print(f'Reading dataset from {input_path}')
 data = pd.read_csv(input_path)
 print(f'Dataset imported. Shape: {data.shape}')
 
