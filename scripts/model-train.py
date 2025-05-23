@@ -73,8 +73,8 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 print('Model training...')
-model = LogisticRegression(max_iter=1000)
-classifier = OneVsRestClassifier(model)
+model = LogisticRegression(max_iter=1000, n_jobs= -1)
+classifier = OneVsRestClassifier(model, n_jobs=-1)
 classifier.fit(X_train, y_train)
 
 print('Saving a model...')
