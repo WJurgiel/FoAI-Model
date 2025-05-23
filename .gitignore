@@ -1,1 +1,5 @@
 *.csv
+/backup
+*.docx
+*.jfif
+/data
